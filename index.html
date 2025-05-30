@@ -386,6 +386,47 @@ button[type="submit"]:hover {
   }
 }
       </style>
+      <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js";
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
+      
+      // Your web app's Firebase configuration
+      const firebaseConfig = {
+      apiKey: "AIzaSyDFT07Lyl15EvWnBH3kssRmTCo05d6sckw",
+      authDomain: "delevery-ff437.firebaseapp.com",
+      projectId: "delevery-ff437",
+      storageBucket: "delevery-ff437.firebasestorage.app",
+      messagingSenderId: "880725670079",
+      appId: "1:880725670079:web:e32d0bec017558fb7eee0a"
+      };
+      
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      </script>
+      <script src="https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore.js"></script>
+      <script>
+      // إعداد الاتصال بفايربيز
+      const firebaseConfig = {
+      // الصق إعداداتك هنا من الخطوة 4 (firebaseConfig)
+      };
+      
+      const app = firebase.initializeApp(firebaseConfig);
+      const db = firebase.firestore();
+      
+      // وظيفة لإرسال الطلب إلى Firestore
+      function sendOrder(data) {
+      db.collection("orders").add(data)
+      .then(() => {
+      alert("تم إرسال الطلب بنجاح!");
+      })
+      .catch((error) => {
+      alert("حدث خطأ أثناء إرسال الطلب: " + error);
+      });
+      }
+      </script>
       </head>
       <body>
       
@@ -437,6 +478,25 @@ button[type="submit"]:hover {
       <button type="submit">إرسال الطلب</button>
       <div class="success-msg" id="successMessage">تم إرسال الطلب بنجاح!</div>
       </form>
+      <form id="orderForm" onsubmit="submitForm(event)">
+      <!-- حقول النموذج هنا -->
+      </form>
+      
+      <script>
+      function submitForm(event) {
+      event.preventDefault(); // يمنع الإرسال التقليدي للنموذج
+      const data = {
+      name: document.getElementById('name').value,
+      phone: document.getElementById('phone').value,
+      restaurant: document.getElementById('restaurant').value,
+      meal: document.getElementById('meal').value,
+      address: document.getElementById('address').value,
+      timestamp: new Date()
+      };
+      sendOrder(data);
+      document.getElementById('orderForm').reset(); // تفريغ النموذج بعد الإرسال
+      }
+      </script>
       </section>
       
       <section id="about">
